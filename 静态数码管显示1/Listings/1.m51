@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        07/19/2023  17:22:53  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/19/2023  17:36:32  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -12,6 +12,7 @@ MEMORY MODEL: SMALL
 INPUT MODULES INCLUDED:
   .\Objects\STARTUP.obj (?C_STARTUP)
   .\Objects\main.obj (MAIN)
+  D:\SOFTWARE\COMPUTING\UV4\C51\LIB\C51S.LIB (?C_INIT)
 
 
 LINK MAP OF MODULE:  .\Objects\1 (?C_STARTUP)
@@ -22,31 +23,31 @@ LINK MAP OF MODULE:  .\Objects\1 (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0002H     UNIT         _DATA_GROUP_
-            IDATA   000AH     0001H     UNIT         ?STACK
+            DATA    0008H     000BH     UNIT         ?DT?MAIN
+            IDATA   0013H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
                     0003H     07FDH                  *** GAP ***
-            CODE    0800H     0063H     UNIT         ?PR?_NEXIE?MAIN
-            CODE    0863H     000CH     UNIT         ?C_C51STARTUP
-            CODE    086FH     000BH     UNIT         ?PR?MAIN?MAIN
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0063H     UNIT         ?PR?_NEXIE?MAIN
+            CODE    08EFH     000EH     UNIT         ?C_INITSEG
+            CODE    08FDH     000BH     UNIT         ?PR?MAIN?MAIN
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\1 (?C_STARTUP)
 
 
-SEGMENT                          DATA_GROUP 
-  +--> CALLED SEGMENT          START    LENGTH
-----------------------------------------------
-?C_C51STARTUP                  -----    -----
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
   +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
 
-?PR?MAIN?MAIN                  -----    -----
+?PR?MAIN?MAIN
   +--> ?PR?_NEXIE?MAIN
-
-?PR?_NEXIE?MAIN                0008H    0002H
 
 
 
@@ -56,12 +57,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\1 (?C_STARTUP)
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:0863H         SEGMENT       ?C_C51STARTUP
-  I:000AH         SEGMENT       ?STACK
+  C:0800H         SEGMENT       ?C_C51STARTUP
+  I:0013H         SEGMENT       ?STACK
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/19/2023  17:36:32  PAGE 2
+
+
   C:0000H         PUBLIC        ?C_STARTUP
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/19/2023  17:22:53  PAGE 2
-
-
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
   D:0083H         SYMBOL        DPH
@@ -69,7 +70,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\1 (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:0866H         SYMBOL        IDATALOOP
+  C:0803H         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -78,18 +79,18 @@ SYMBOL TABLE OF MODULE:  .\Objects\1 (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:0863H         SYMBOL        STARTUP1
+  C:0800H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:0863H         LINE#         133
-  C:0865H         LINE#         134
-  C:0866H         LINE#         135
-  C:0867H         LINE#         136
-  C:0869H         LINE#         185
-  C:086CH         LINE#         196
+  C:0800H         LINE#         133
+  C:0802H         LINE#         134
+  C:0803H         LINE#         135
+  C:0804H         LINE#         136
+  C:0806H         LINE#         185
+  C:0809H         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        MAIN
@@ -98,43 +99,44 @@ SYMBOL TABLE OF MODULE:  .\Objects\1 (?C_STARTUP)
   B:00A0H.2       PUBLIC        P2_2
   B:00A0H.3       PUBLIC        P2_3
   B:00A0H.4       PUBLIC        P2_4
-  C:086FH         PUBLIC        main
-  C:0800H         PUBLIC        _Nexie
+  C:08FDH         PUBLIC        main
+  D:0008H         PUBLIC        NexieTable
+  C:088CH         PUBLIC        _Nexie
   -------         PROC          _NEXIE
   D:0007H         SYMBOL        Location
-  D:0008H         SYMBOL        Number
-  C:0800H         LINE#         2
-  C:0804H         LINE#         3
-  C:0804H         LINE#         4
-  C:0831H         LINE#         5
-  C:0831H         LINE#         6
-  C:0835H         LINE#         7
-  C:0839H         LINE#         8
-  C:083DH         LINE#         9
-  C:0841H         LINE#         10
-  C:0849H         LINE#         11
-  C:0851H         LINE#         12
-  C:0859H         LINE#         13
-  C:085FH         LINE#         14
-  C:085FH         LINE#         15
-  C:0862H         LINE#         16
+  D:0004H         SYMBOL        Number
+  C:088CH         LINE#         3
+  C:088CH         LINE#         4
+  C:088CH         LINE#         5
+  C:08B9H         LINE#         6
+  C:08B9H         LINE#         7
+  C:08BDH         LINE#         8
+  C:08C1H         LINE#         9
+  C:08C5H         LINE#         10
+  C:08C9H         LINE#         11
+  C:08D1H         LINE#         12
+  C:08D9H         LINE#         13
+  C:08E1H         LINE#         14
+  C:08E7H         LINE#         15
+  C:08E7H         LINE#         16
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/19/2023  17:36:32  PAGE 3
+
+
+  C:08EEH         LINE#         17
   -------         ENDPROC       _NEXIE
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/19/2023  17:22:53  PAGE 3
-
-
   -------         PROC          MAIN
-  C:086FH         LINE#         17
-  C:086FH         LINE#         18
-  C:086FH         LINE#         19
-  C:0878H         LINE#         20
-  C:0878H         LINE#         21
-  C:0878H         LINE#         23
+  C:08FDH         LINE#         18
+  C:08FDH         LINE#         19
+  C:08FDH         LINE#         20
+  C:0906H         LINE#         21
+  C:0906H         LINE#         22
+  C:0906H         LINE#         24
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 007DH BYTE ( 6%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 008AH BYTE ( 6%) *
 ******************************************************************************
 
-Program Size: data=11.0 xdata=0 code=125
+Program Size: data=20.0 xdata=0 code=267
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

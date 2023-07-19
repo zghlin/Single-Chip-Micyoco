@@ -1,4 +1,5 @@
 #include <REGX52.H>
+unsigned char NexieTable[]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x07,0x7F,0x6F};
 void Nexie(unsigned char Location,Number)
 {
 	switch(Location)
@@ -12,11 +13,11 @@ void Nexie(unsigned char Location,Number)
 		case 7:P2_4=0;P2_3=0;P2_2=1;break;
 		case 8:P2_4=0;P2_3=0;P2_2=0;break;
 	}
-	P0=0x7D;
+	P0=NexieTable[Number];
 }
 void main()
 {
-		Nexie(7,3);
+		Nexie(7,4);
 		while(1)
 		{
 		
