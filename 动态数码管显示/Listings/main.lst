@@ -1,0 +1,69 @@
+C51 COMPILER V9.54   MAIN                                                                  07/19/2023 18:21:54 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\software\computing\UV4\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(
+                    -.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          unsigned char NexieTable[]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x07,0x7F,0x6F};
+   3          void Delay(unsigned int xms)    //@12.000MHz
+   4          {
+   5   1        unsigned char i, j;
+   6   1        while(xms--)
+   7   1        {
+   8   2          i = 2;
+   9   2        j = 239;
+  10   2        do
+  11   2        {
+  12   3          while (--j);
+  13   3        } while (--i);
+  14   2        }
+  15   1      }
+  16          
+  17          void Nexie(unsigned char Location,Number)
+  18          {
+  19   1        switch(Location)
+  20   1        {
+  21   2          case 1:P2_4=1;P2_3=1;P2_2=1;break;
+  22   2          case 2:P2_4=1;P2_3=1;P2_2=0;break;
+  23   2          case 3:P2_4=1;P2_3=0;P2_2=1;break;
+  24   2          case 4:P2_4=1;P2_3=0;P2_2=0;break;
+  25   2          case 5:P2_4=0;P2_3=1;P2_2=1;break;
+  26   2          case 6:P2_4=0;P2_3=1;P2_2=0;break;
+  27   2          case 7:P2_4=0;P2_3=0;P2_2=1;break;
+  28   2          case 8:P2_4=0;P2_3=0;P2_2=0;break;
+  29   2        }
+  30   1        P0=NexieTable[Number];
+  31   1      }
+  32          void main()
+  33          {
+  34   1          while(1)
+  35   1          {
+  36   2            Nexie(1,1);
+  37   2            Delay(1);
+  38   2            Nexie(2,2);
+  39   2            Delay(1);
+  40   2            Nexie(3,3);
+  41   2            Delay(1);
+  42   2          }
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    167    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.54   MAIN                                                                  07/19/2023 18:21:54 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
