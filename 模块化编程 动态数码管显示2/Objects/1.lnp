@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\Delay.obj",
+".\Objects\Nexie.obj" 
+TO ".\Objects\1" 
+PRINT(".\Listings\1.m51") RAMSIZE(256) 
